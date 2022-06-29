@@ -1,0 +1,62 @@
+
+.main-container {
+    max-width: 1500px;
+    margin: 0 auto;
+}
+.salons {
+    /*margin: 0 90px;*/
+}
+
+.salons-card {
+    margin-bottom: 40px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.card-title a {
+
+    /*font-family: Arial,'Anek Malayalam', sans-serif;*/
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000;
+}
+
+.card-title a:hover {
+    text-decoration: underline;
+}
+
+.card-text {
+    /*font-family: Arial,'Anek Malayalam', sans-serif;*/
+    font-family: 'Montserrat', sans-serif;
+    font-size: 19px;
+}
+
+.procedure-title {
+    margin: 35px 0;
+    text-align: center;
+    letter-spacing: 5px;
+}
+.cities {
+    float: left;
+    text-align: left;
+    width: 400px;
+    /*font-family: 'Anek Malayalam', sans-serif;*/
+    font-family: 'Montserrat', sans-serif;
+}
+
+.cities .list-group-item a{
+    /*font-family: 'Anek Malayalam', sans-serif;*/
+    font-family: 'Montserrat', sans-serif;
+    color: #000;
+    text-decoration: none;
+}
+
+.salons {
+    float: right;
+
+}
+
+.salons-city {
+    float: right;
+}
