@@ -1,5 +1,5 @@
 .booking-card-header h1 strong, .booking-card-header h3, .top h1 strong, .top .booking-address, .bottom .booking-price, .booking-card-title,
-.date-and-time, #input {
+.date-and-time, #input, .alert-heading, .booking-alert strong, .booking-alert span {
     font-family: 'Montserrat', sans-serif;
 }
 .booking-card-header {

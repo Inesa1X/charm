@@ -23,4 +23,8 @@ class Salon extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
 }

@@ -1,0 +1,10 @@
+.mybookings-table th, .mybookings-table p, .mybookings-table button {
+    font-family: Montserrat;
+}
+
+.mybookings-table button:hover {
+    /*background-color: yellow;*/
+}
+
+
+

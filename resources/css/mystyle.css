@@ -1,0 +1,102 @@
+* {
+    box-sizing: border-box;
+    font-family: Perpetua Titling MT;
+}
+
+body {
+    margin: 0;
+    /*font-family: Arial, Helvetica, sans-serif;*/
+}
+
+/* Style the content */
+.header {
+    background-color: #dedede;
+}
+
+.logo {
+    margin: 0;
+}
+
+.logo a {
+    text-decoration: none;
+    color: #000;
+    font-size: 62px;
+    margin: 0;
+    padding: 0;
+}
+.logo a:hover {
+    color: #000;
+}
+.login {
+    float: right;
+    font-family: sans-serif;
+}
+
+.login a:link, .login a:visited {
+    text-decoration: none;
+    color: white;
+}
+.main-name {
+    padding-top: 58px;
+    height: 200px;
+    text-align:center;
+    letter-spacing:17px;
+}
+
+/* Style the footer */
+.footer {
+    text-align: center;
+    background-color: #dedede;
+    padding: 10px;
+}
+
+
+.cities {
+    display: inline-block;
+    font-size: 34px;
+    text-align: center;
+}
+
+.home_container {
+    width: 1500px;
+    margin: 30px auto;
+}
+.home_container .card {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.home_container .card-title {
+    font-family: Montserrat;
+    font-weight: bold;
+}
+
+
+.home-title {
+    font-family: Montserrat;
+    margin-bottom: 30px;
+}
+.home_container a.btn {
+    border: none;
+    background-color: #f886e6;
+    font-family: Montserrat;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.home_container a.btn:hover {
+    background-color:  #e775e5;
+}
+
+.home_container .card-text {
+    font-size: 12px;
+}
+
+
+.home_container .card div{
+    overflow: hidden;
+}
+.home_container img.card-img-top {
+    transition: all 0.3s;
+}
+.home_container img.card-img-top:hover {
+    transform: scale(1.06);
+}

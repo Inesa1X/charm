@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+//use App\Models\Category;
 use App\Models\Salon;
 use App\Models\Procedure;
 use App\Models\Booking;
-use App\Models\User;
+//use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
 use \Carbon\Carbon;
@@ -21,9 +21,8 @@ class BookingController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth', 'isMaster'])->except('create');
-//        $this->middleware('checkrole');//->only('index');
-
+        $this->middleware(['auth'])->only(['bookProcedure', 'index', 'calendar', 'saveDate','destroyBooking', 'destroySavedDate']);
+        $this->middleware('isMaster')->except(['create', 'index', 'bookProcedure', 'destroyBooking']);
     }
 
     public function index()
@@ -41,7 +40,7 @@ class BookingController extends Controller
     {
         $salon = Salon::findOrFail($salon_id);
         $procedure = Procedure::findOrFail($procedure_id);
-        return view('booking', compact('salon', 'procedure'));
+        return view('booking', ['salon' => $salon, 'procedure' => $procedure]);
     }
 
     /**
@@ -50,27 +49,26 @@ class BookingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function book(Request $request)
+    public function bookProcedure(Request $request)
     {
-
         $time =  Carbon::parse($request['date_time'])->format('H:i');
         $date = Carbon::parse($request['date_time'])->format('Y-m-d H:i:s');
         $master = json_decode($request->master);
         $request->validate([
-            'master' => 'required',
+            'master' => 'required|not_in:0',
+            'date_time' => 'required'
         ]);
 
-
-        $booking = new  Booking();
+        $booking = new Booking();
         $booking->city = $request['city'];
         $booking->salon = $request['salon'];
         $booking->salon_address = $request['salon_address'];
         $booking->category = $request['category'];
         $booking->procedure = $request['procedure'];
-        $booking->master_id = $master !== 0 ? $master->id : 0;
-        $booking->master_name = $master !== 0 ? $master->name : "ANY";
-        $booking->master_email = $master !== 0 ? $master->email : "";
-        $booking->master_avatar = $master !== 0 ? $master->avatar : "https://image.shutterstock.com/image-vector/unknown-male-silhouette-profile-avatar-260nw-1670055142.jpg";
+        $booking->master_id =  $master->id;
+        $booking->master_name =  $master->name;
+        $booking->master_email = $master->email;
+        $booking->master_avatar = "";
         $booking->user = $request['user'];
         $booking->user_email = $request['user_email'];
         $booking->date = $date;
@@ -80,55 +78,28 @@ class BookingController extends Controller
 
         $booking->save();
 
-        return \Redirect::back()->withErrors(['msg' => $master->name]);
+        return \Redirect::back()->withErrors(['msg' => Carbon::parse($request['date_time'])->format('Y-m-d') .' '. $time]);
     }
 
     public function calendar() {
-
-//
-
-//        current(array_filter($availabilityDates, function($item) {
-//            print_r($item);
-//        }));
-
-//
+        $bookings = Booking::all()->where('date_type', '=', 'SCHEDULE')->where('master_id', '=', Auth::user()->id);
+        $availabilityDates = array();
+        foreach($bookings as $booking) {
+            array_push($availabilityDates, Carbon::create($booking->date)->format("Y-m-d"));
+        }
         return view('master.calendar', ['availabilityDates' => $availabilityDates]);
     }
 
 
+    public function saveDate(Request $request) {
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        $booking = new  Booking();
+        $booking->date = $request->date;
+        $booking->master_id = Auth::user()->id;
+        $booking->date_type = "SCHEDULE";
+        $booking->save();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        return back();
     }
 
     /**
@@ -141,9 +112,14 @@ class BookingController extends Controller
     {
         $booking = Booking::findOrFail($id);
         $booking->delete();
-//        return redirect('/user/bookings');
         return back();
     }
 
+    public function destroySavedDate($date) {
+
+        $savedDate = Booking::where('date_type','SCHEDULE')->where('date', $date)->where('master_id', Auth::user()->id);
+        $savedDate->delete();
+        return back();
+    }
 
 }

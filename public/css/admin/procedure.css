@@ -1,0 +1,37 @@
+.procedure-container {
+    width: 1200px;
+    margin: 0 auto;
+}
+.procedures {
+    margin-bottom: 30px;
+    display: inline-block;
+}
+.add-procedure {
+    float: right;
+}
+.procedure {
+    color: #777;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.procedure a:hover {
+    color: #f886e6;
+}
+.procedure-title {
+    /*text-decoration: underline;*/
+}
+.procedure-delete {
+    border: none;
+    background-color: #fff;
+    width: 0;
+    height: 0;
+    /*display: none;*/
+    cursor: pointer;
+}
+
+
+
+/*-------------------------------------------*/
+

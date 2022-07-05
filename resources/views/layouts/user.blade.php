@@ -21,18 +21,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/mystyle.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
-    {{--    <link href="{{ asset('css/card.css') }}" rel="stylesheet">--}}
-    <link href="{{ asset('css/salons.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/salon.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/booking.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/mybookings.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/calendar.css') }}" rel="stylesheet">
-
-
-
-
 </head>
 <body>
 <div id="app">
@@ -45,7 +33,6 @@
         <div class="navbar-container">
 
             @foreach(\App\Models\Category::all() as $category)
-
                 <div class="subnav">
                     <button class="subnavbtn">{{$category->title}} <i class="fa fa-caret-down"></i></button>
                     <div class="subnav-content">

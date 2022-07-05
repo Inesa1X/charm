@@ -31,7 +31,7 @@
                                 {{$procedure->title}} •
                             @endforeach
                         </p>
-                        <a href="#" class="btn btn-primary">Book Now</a>
+                        <a href="{{route('salon', $salons[1]->id)}}" class="btn btn-primary">Book Now</a>
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                                 {{$procedure->title}} •
                             @endforeach
                         </p>
-                        <a href="#" class="btn btn-primary">Book Now</a>
+                        <a href="{{route('salon', $salons[2]->id)}}" class="btn btn-primary">Book Now</a>
                     </div>
                 </div>
             </div>

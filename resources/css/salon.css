@@ -46,17 +46,17 @@ h4.procedure-title strong {
 
 .accordion-button {
     letter-spacing: 2px;
-   text-align: center;
+    text-align: center;
 }
 
 .accordion-button[aria-expanded="true"] {
     background-color: #f886e6 !important;
-    color: #fff;
-
+    color: #fff !important;
+    border: none !important;
 }
 
 .accordion-button:focus {
-    box-shadow: none;
+    box-shadow: none !important;
 }
 
 

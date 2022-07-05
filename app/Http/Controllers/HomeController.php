@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Category;
 use App\Models\Salon;
 class HomeController extends Controller
 {
@@ -27,12 +25,4 @@ class HomeController extends Controller
         $salons = Salon::all();
         return view('index', ['salons' => $salons]);
     }
-
-
-
-    public function destroy($id) {
-
-    }
-
-
 }

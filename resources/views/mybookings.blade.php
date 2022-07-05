@@ -7,7 +7,6 @@
 
             @if(Auth::user()->role_id == 2)
                 <th>User</th>
-                <th>Master</th>
             @elseif(Auth::user()->role_id == 3)
                 <th>Master</th>
             @endif
@@ -51,12 +50,10 @@
                             <p class="fw-bold mb-1">{{$booking->time}}</p>
                         </td>
                         <td>
-
                             <form method="POST" action="{{route('destroy', [$booking->id])}}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
-
                             </form>
                         </td>
                     </tr>
@@ -65,47 +62,43 @@
 
             @if(Auth::user()->role_id == 2)
                 @foreach(Auth::user()->master_bookings as $booking)
-
-                <tr>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <div class="ms-3">
-                                <p class="fw-bold mb-1">{{\App\Models\User::find($booking->user)->name}}</p>
-                                <p class="text-muted mb-0">{{\App\Models\User::find($booking->user)->email}}</p>
+                    @if($booking->date_type == 'BOOKING')
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="ms-3">
+                                    <p class="fw-bold mb-1">{{\App\Models\User::find($booking->user)->name}}</p>
+                                    <p class="text-muted mb-0">{{\App\Models\User::find($booking->user)->email}}</p>
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1">{{$booking->master_name}}</p>
-                        <p class="text-muted mb-0">€{{$booking->master_email}}</p>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1">{{$booking->procedure}}</p>
-                        <p class="text-muted mb-0">€{{$booking->price}}</p>
-                    </td>
-                    <td>
-                        <p class="fw-bold mb-1">{{$booking->salon}}</p>
-                        <p class="text-muted mb-0">€{{$booking->salon_address}}</p>
-                    </td>
-                    <td>
-                        <p class="fw-bold mb-1">{{$booking->city}}</p>
-                        {{-- <p class="text-muted mb-0">€{{$booking->price}}</p> --}}
-                    </td>
-                    <td>
-                        <p class="fw-bold mb-1">{{Carbon\Carbon::parse($booking->date)->format('Y-m-d')}}</p>
-                    </td>
-                    <td>
-                        <p class="fw-bold mb-1">{{$booking->time}}</p>
-                    </td>
-                    <td>
-                        <form method="POST" action="{{route('destroy', $booking->id)}}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-info">Delete</button>
-                            <button type="button" class="btn btn-outline-dark">Edit</button>
-                        </form>
-                    </td>
-                </tr>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">{{$booking->procedure}}</p>
+                            <p class="text-muted mb-0">€{{$booking->price}}</p>
+                        </td>
+                        <td>
+                            <p class="fw-bold mb-1">{{$booking->salon}}</p>
+                            <p class="text-muted mb-0">€{{$booking->salon_address}}</p>
+                        </td>
+                        <td>
+                            <p class="fw-bold mb-1">{{$booking->city}}</p>
+                            {{-- <p class="text-muted mb-0">€{{$booking->price}}</p> --}}
+                        </td>
+                        <td>
+                            <p class="fw-bold mb-1">{{Carbon\Carbon::parse($booking->date)->format('Y-m-d')}}</p>
+                        </td>
+                        <td>
+                            <p class="fw-bold mb-1">{{$booking->time}}</p>
+                        </td>
+                        <td>
+                            <form method="POST" action="{{route('destroy', $booking->id)}}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-info">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endif
                 @endforeach
             @endif
 

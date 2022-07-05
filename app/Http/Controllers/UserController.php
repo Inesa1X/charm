@@ -12,6 +12,12 @@ use function view;
 
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['auth', 'isAdmin']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -35,17 +41,6 @@ class UserController extends Controller
     public function create()
     {
         return view('admin.user.create', ['users' => User::all()]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -86,9 +81,8 @@ class UserController extends Controller
         $request->validate([
             'password' => 'confirmed|min:6'
         ]);
-//        dd($request->all());
 
-        $user->salon_id = $request->salon_id;
+        $user->salon_id = $request->role_id == 3 ? 0 : $request->salon_id;
         $user->update($request->all());
 
         return back();
@@ -104,6 +98,5 @@ class UserController extends Controller
     {
         User::findOrFail($id)->delete();
         return back();
-//        return redirect(route('admin.user'));
     }
 }

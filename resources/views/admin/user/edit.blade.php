@@ -35,7 +35,6 @@
             <input id="password-confirm" type="password" class="form-control" name="password_confirmation"  value="{{$user->password}}" autocomplete="new-password">
         </div>
 
-
         <div class="mb-3">
             <label for="inputSalon" class="form-label">Salon</label>
                 @if($user->role_id == 1 || $user->role_id == 2)
